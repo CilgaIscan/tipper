@@ -1,5 +1,5 @@
 # tipper
-
+Demo @ https://admiring-visvesvaraya-d2a817.netlify.app
 ## Project setup
 ```
 yarn install
