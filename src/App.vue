@@ -1,28 +1,61 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <span>
+      <p>Please enter your voucher amount: 
+      <input type="number" v-model.number="voucher" @change="onChange" /> </p>
+    </span>
+    <span>
+      <p>Please select desired tip percentage:
+      <select v-model="tipPercentage" @change="onChange">
+        <option
+          :value="percent"
+          :key="percent"
+          v-for="percent in percentages"
+        >
+          {{ percent }}
+        </option>
+      </select> </p>
+    </span>
+    <span>
+      <p> You should be tipping {{ result }} TL. </p>
+    </span>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  data: function () {
+      return {
+        voucher: 45,
+        percentages: [5, 10, 15, 20],
+        tipPercentage: 10,
+        result: null,
+      };
+  },
+  methods: {
+    onChange() {
+      switch (this.tipPercentage) {
+        case 5:
+          this.result = this.voucher * 0.05;
+          break;
+        case 10:
+          this.result = this.voucher * 0.1;
+          break;
+        case 15:
+          this.result = this.voucher * 0.15;
+          break;
+        case 20:
+          this.result = this.voucher * 0.2;
+          break;
+        default:
+          console.log("Percent is not found!");
+      }
+    },
+  },
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
